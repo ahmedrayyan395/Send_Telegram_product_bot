@@ -18,7 +18,8 @@ def send_product_data_to_telegram():
             product_name = soup.find("span", class_="base", itemprop="name").text.strip()
 
             # Extract product status
-            product_status = soup.find("div", class_="stock unavailable").span.text.strip()
+            product_status_element = soup.find("div", class_="stock available").span
+            product_status = product_status_element.text.strip() if product_status_element else None
 
             return product_name, product_status
         except Exception as e:
@@ -74,8 +75,8 @@ def send_product_data_to_telegram():
         product_status = product_data.get("status", "")
         product_url = product_data.get("url", "")
 
-        # Check if the product status is "متوفر الآن للشراء"
-        if product_status != "سيتم توفيرها في المخزون قريباً":
+        # Check if the product status is "متوفر"
+        if product_status == "متوفر":
             # Create the message text
             message_text = f"Product Name: {product_name}\nProduct Status: {product_status}\nProduct URL: {product_url}"
 
