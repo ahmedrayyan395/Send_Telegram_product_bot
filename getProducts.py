@@ -71,21 +71,23 @@ def send_product_data_to_telegram():
 
     for product_data in product_data_list:
         product_name = product_data.get("name", "")
-        product_status = product_data.get("status", "")  # سيتم توفيرها في المخزون قريباً 
+        product_status = product_data.get("status", "")
         product_url = product_data.get("url", "")
 
-        # Create the message text
-        message_text = f"Product Name: {product_name}\nProduct Status: {product_status}\nProduct URL: {product_url}"
+        # Check if the product status is "متوفر الآن للشراء"
+        if product_status == "متوفر الآن للشراء":
+            # Create the message text
+            message_text = f"Product Name: {product_name}\nProduct Status: {product_status}\nProduct URL: {product_url}"
 
-        # Send the message to the Telegram channel
-        params = {"chat_id": chat_id, "text": message_text}
-        response = requests.post(telegram_api_url, params=params)
+            # Send the message to the Telegram channel
+            params = {"chat_id": chat_id, "text": message_text}
+            response = requests.post(telegram_api_url, params=params)
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            print(f"Product data sent successfully for {product_name}")
-        else:
-            print(f"Failed to send product data for {product_name}. Status code: {response.status_code}")
+            # Check if the request was successful
+            if response.status_code == 200:
+                print(f"Product data sent successfully for {product_name}")
+            else:
+                print(f"Failed to send product data for {product_name}. Status code: {response.status_code}")
 
 # Main loop to run the code every minute
 while True:
