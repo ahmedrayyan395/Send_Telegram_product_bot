@@ -35,11 +35,14 @@ def extract_product_details(product_url):
 def send_product_data_to_telegram():
     global sent_products, last_clear_time  # Access the global variables
 
-    # Fetch the HTML content of the page
+  # Example usage
     url = "https://www.dzrt.com/ar/our-products.html"
-    response = requests.get(url)
-    html_content = response.content
-
+    html_content = fetch_url_with_retry(url)
+    if html_content:
+        print("HTML Content:")
+        print(html_content)
+    else:
+        print("Failed to fetch HTML content.")
     # Parse HTML content with BeautifulSoup
     soup = BeautifulSoup(html_content, "html.parser")
 
@@ -75,9 +78,10 @@ def send_product_data_to_telegram():
     payload = json.dumps(product_data_list)
 
      # Send the product data to the Telegram channel using the bot
-    bot_token = "6530044692:AAEmcZWukNJ-VWg7Dhux-DQuB0GJqc2No70"
+    bot_token = "6530044692:AAEGFxxRP5Ry4WEiWQ_JasPDbnoLT5kxi2I"
 
     #https://t.me/dzrtsa
+    #https://t.me/dezert224
     chat_id = "@dzrtsa"  # Replace with your channel username
     telegram_api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
 
@@ -107,6 +111,31 @@ def send_product_data_to_telegram():
     if time.time() - last_clear_time >= 3600:  # Check if at least 4 minutes have passed
         sent_products.clear()
         last_clear_time = time.time()  # Update the last clear time
+
+
+def fetch_url_with_retry(url, max_retries=7, delay=1):
+    retries = 0
+    while retries < max_retries:
+        try:
+            # Make the request
+            response = requests.get(url)
+            # If the request was successful, return the content
+            if response.status_code == 200:
+                return response.content
+            else:
+                print(f"Failed to fetch URL: {url}. Status code: {response.status_code}")
+        except requests.RequestException as e:
+            # If an error occurs, print the error and retry after a delay
+            print(f"An error occurred: {e}")
+        
+        # Increment the retry counter
+        retries += 1
+        # Delay before retrying
+        time.sleep(delay)
+    
+    # If max retries reached and no successful response received, return None
+    print(f"Max retries reached for URL: {url}")
+    return None
 
 # Main loop to run the code every minute
 while True:
