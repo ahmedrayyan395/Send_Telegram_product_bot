@@ -91,7 +91,7 @@ def send_product_data_to_telegram():
         product_url = product_data.get("url", "")
 
         # Check if the product status is "متوفر" and it's not in the list of sent products
-        if product_status == "متوفر" and product_name not in sent_products:
+        if product_status == "سيتم توفيرها في المخزون قريباً" and product_name not in sent_products:
             # Create the message text
             message_text = f"Product Name: {product_name}\nProduct Status: {product_status}\nProduct URL: {product_url}"
 
