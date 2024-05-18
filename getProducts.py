@@ -39,8 +39,8 @@ def send_product_data_to_telegram():
     url = "https://www.dzrt.com/ar/our-products.html"
     html_content = fetch_url_with_retry(url)
     if html_content:
-        print("HTML Content:")
-        print(html_content)
+       # print("HTML Content:")
+       # print(html_content)
     else:
         print("Failed to fetch HTML content.")
     # Parse HTML content with BeautifulSoup
