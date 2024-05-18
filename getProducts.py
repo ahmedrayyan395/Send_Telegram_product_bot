@@ -80,9 +80,9 @@ def send_product_data_to_telegram():
      # Send the product data to the Telegram channel using the bot
     bot_token = "6958486146:AAFtYb_TaInJtSSFevXDn39BCssCzj4inV4"
 
-    #https://t.me/dzrtsa
+    #https://t.me/dzrtsa https://t.me/dezert224
     #https://t.me/dezert224 @dzrtsa
-    chat_id = "@botdezertbot"  # Replace with your channel username
+    chat_id = "@dezert224"  # Replace with your channel username
     telegram_api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
 
     for product_data in product_data_list:
