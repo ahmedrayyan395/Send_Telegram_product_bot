@@ -75,7 +75,7 @@ def send_product_data_to_telegram():
 
         # Send the product data to the Telegram channel using the bot
         bot_token = "6758564840:AAG1L-yn-5-FSru-jZW_oN261YGi-EEqTcs"
-        chat_id = "@vipdizbot"
+        chat_id = "@DZRT_VIPGold"
         telegram_api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
 
         for product_data in product_data_list:
