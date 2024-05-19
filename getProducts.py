@@ -101,7 +101,7 @@ def send_product_data_to_telegram():
                     print(f"Failed to send product data for {product_name}. Status code: {response.status_code}")
 
         # Clear the list of sent products every 60 minutes
-        if time.time() - last_clear_time >= 3600:
+        if time.time() - last_clear_time >= 60:
             sent_products.clear()
             last_clear_time = time.time()  # Update the last clear time
 
