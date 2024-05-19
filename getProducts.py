@@ -133,4 +133,4 @@ def fetch_url_with_retry(url, max_retries=7, delay=1):
 while True:
     send_product_data_to_telegram()
     # Sleep for 60 seconds (1 minute)
-    time.sleep(60)
+    time.sleep(10)
