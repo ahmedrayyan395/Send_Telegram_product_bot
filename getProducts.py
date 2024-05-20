@@ -116,4 +116,4 @@ def send_product_data_to_telegram():
 # Main loop to run the code every minute
 while True:
     send_product_data_to_telegram()
-    time.sleep(20)
+   # time.sleep(20)
