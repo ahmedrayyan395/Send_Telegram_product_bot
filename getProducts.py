@@ -35,7 +35,7 @@ def extract_product_details(product_url):
         soup = BeautifulSoup(html_content, "html.parser")
 
         product_name = soup.find("span", class_="base", itemprop="name").text.strip()
-        product_status_element = soup.find("div", class_="stock unavailable").span
+        product_status_element = soup.find("div", class_="stock available").span
         product_status = product_status_element.text.strip() if product_status_element else None
 
         
