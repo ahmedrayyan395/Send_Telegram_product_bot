@@ -109,7 +109,7 @@ def send_product_data_to_telegram():
                 else:
                     print(f"Failed to send product data for {product_name}. Status code: {response.status_code}")
 
-        if time.time() - last_clear_time >= 120:
+        if time.time() - last_clear_time >= 20:
             sent_products.clear()
             last_clear_time = time.time()
 
