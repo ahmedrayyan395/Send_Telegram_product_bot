@@ -90,7 +90,7 @@ def send_product_data_to_telegram():
             product_url = product_data.get("url", "")
             image_url = product_data.get("image_url", "")
 
-            if product_status == "سيتم توفيرها في المخزون قريباً" and product_name not in sent_products:
+            if product_status == "متوفر" and product_name not in sent_products:
                 message_text = f"Product Name: {product_name}\nProduct Status: {product_status}"
                 reply_markup = {
                     "inline_keyboard": [[{"text": "View Product", "url": product_url}]]
