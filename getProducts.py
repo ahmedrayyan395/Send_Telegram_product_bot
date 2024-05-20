@@ -55,7 +55,7 @@ def extract_product_details(product_url):
 
         return product_name, product_status, image_url
     except Exception as e:
-        print(f"An error occurred while extracting product details for {product_url}: {str(e)}")
+        print(f"still not available  for {product_url}: {str(e)}")
         return None, None, None
 
 # Function to send product data to Telegram
