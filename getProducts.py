@@ -11,7 +11,7 @@ sent_products = []
 product_send_times = {}
 
 # List of products that have special handling
-special_products = ["هايلاند بيريز", "سبايسي زيست"]
+special_products = ["بيربل مست","هايلاند بيريز", "سبايسي زيست"]
 
 # Variable to store the time of the last clearing of the sent_products list
 last_clear_time = time.time()
@@ -94,7 +94,7 @@ def send_product_data_to_telegram():
             if product_status == "متوفر":
                 current_time = time.time()
                 if product_name in special_products:
-                    if (product_name not in sent_products) or (current_time - product_send_times.get(product_name, 0) >= 300):
+                    if (product_name not in sent_products) or (current_time - product_send_times.get(product_name, 0) >= 600):
                         message_text = f"Product Name: {product_name}\nProduct Status: {product_status}"
                         reply_markup = {
                             "inline_keyboard": [[{"text": "View Product", "url": product_url}]]
