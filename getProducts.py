@@ -7,7 +7,7 @@ import re
 # Global list to store product names that are successfully sent
 sent_products = []
 
-# Dictionary to store the time each product was last sent
+# Dictionary to store the time each product was last sentu
 product_send_times = {}
 
 # List of products that have special handling
