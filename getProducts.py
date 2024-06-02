@@ -41,7 +41,7 @@ def extract_product_details(product_url):
         soup = BeautifulSoup(html_content, "html.parser")
 
         product_name = soup.find("span", class_="base", itemprop="name").text.strip()
-        product_status_element = soup.find("div", class_="stock unavailable").span
+        product_status_element = soup.find("div", class_="stock available").span
         product_status = product_status_element.text.strip() if product_status_element else None
 
         # Extract all image URLs and find the one containing the desired pattern
@@ -91,7 +91,7 @@ def send_product_data_to_telegram():
             product_url = product_data.get("url", "")
             image_url = product_data.get("image_url", "")
 
-            if product_status == "سيتم توفيرها في المخزون قريباً":
+            if product_status == "متوفر":
                 current_time = time.time()
                 if product_name in special_products:
                     if (product_name not in sent_products) or (current_time - product_send_times.get(product_name, 0) >= 600):
