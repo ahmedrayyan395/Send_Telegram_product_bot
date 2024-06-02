@@ -91,7 +91,7 @@ def send_product_data_to_telegram():
             product_url = product_data.get("url", "")
             image_url = product_data.get("image_url", "")
 
-            if product_status == "سيتم توفيرها في المخزون قريبا":
+            if product_status == "سيتم توفيرها في المخزون قريباً":
                 current_time = time.time()
                 if product_name in special_products:
                     if (product_name not in sent_products) or (current_time - product_send_times.get(product_name, 0) >= 600):
