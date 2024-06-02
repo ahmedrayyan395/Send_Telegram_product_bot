@@ -2,12 +2,11 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import time
-import re
 
 # Global list to store product names that are successfully sent
 sent_products = []
 
-# Dictionary to store the time each product was last sentu
+# Dictionary to store the time each product was last sent
 product_send_times = {}
 
 # List of products that have special handling
@@ -94,10 +93,15 @@ def send_product_data_to_telegram():
             if product_status == "متوفر":
                 current_time = time.time()
                 if product_name in special_products:
-                    if (product_name not in sent_products) or (current_time - product_send_times.get(product_name, 0) >= 600):
-                        message_text = f"Product Name: {product_name}\nProduct Status: {product_status}"
+                    if (product_name not in sent_products) or (current_time - product_send_times.get(product_name, 0) >= (3*600)):
+                        message_text = f"اسم المنتج: {product_name}\nحالة المنتج: {product_status}"
                         reply_markup = {
-                            "inline_keyboard": [[{"text": "View Product", "url": product_url}]]
+                            "inline_keyboard": [
+                                [{"text": "عرض المنتج", "url": product_url}],
+                                [{"text": "عرض السلة", "url": "https://www.dzrt.com/ar/checkout/cart"}],
+                                [{"text": "تسجيل الدخول", "url": "https://www.dzrt.com/ar/customer/account/login/"}],
+                                [{"text": "الانتقال إلى رابط الدفع النهائي", "url":"https://www.dzrt.com/ar/onestepcheckout.html" }]
+                            ]
                         }
                         params = {
                             "chat_id": chat_id,
@@ -115,9 +119,14 @@ def send_product_data_to_telegram():
                             print(f"Failed to send product data for {product_name}. Status code: {response.status_code}")
                 else:
                     if product_name not in sent_products:
-                        message_text = f"Product Name: {product_name}\nProduct Status: {product_status}"
+                        message_text = f"اسم المنتج: {product_name}\nحالة المنتج: {product_status}"
                         reply_markup = {
-                            "inline_keyboard": [[{"text": "View Product", "url": product_url}]]
+                            "inline_keyboard": [
+                                [{"text": "عرض المنتج", "url": product_url}],
+                                [{"text": "عرض السلة", "url": "https://www.dzrt.com/ar/checkout/cart"}],
+                                [{"text": "تسجيل الدخول", "url": "https://www.dzrt.com/ar/customer/account/login/"}],
+                                [{"text": "الانتقال إلى رابط الدفع النهائي", "url":"https://www.dzrt.com/ar/onestepcheckout.html" }]
+                            ]
                         }
                         params = {
                             "chat_id": chat_id,
@@ -140,4 +149,4 @@ def send_product_data_to_telegram():
 # Main loop to run the code every minute
 while True:
     send_product_data_to_telegram()
-    #time.sleep(5)
+    #time.sleep(20)
